@@ -1,0 +1,9 @@
+{
+  "workbench.editorAssociations": {
+    "*.db": "sqlite-viewer.option"
+  },
+  "files.associations": {
+    "*.db": "sqlite"
+  }
+}
+
