@@ -3,6 +3,8 @@ __pycache__/
 **/__pycache__/
 *.pyc
 **/*.pyc
+*.egg-info/
+*.egg-info
 .env
 .vscode/
 foodresq_backup.db
