@@ -17,7 +17,10 @@ Features:
 
 import sys
 import os
-sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
+
+base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if base_dir not in sys.path:
+    sys.path.insert(0, base_dir)
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -28,7 +31,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, Response
 
 from backend.database import init_db
 from backend.routers import auth, food, ngos, matching, pickup, impact, chat, db_viewer
@@ -101,7 +104,7 @@ def health_check():
 
 
 
-frontend_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend")
+frontend_path = os.path.join(base_dir, "frontend")
 css_path = os.path.join(frontend_path, "css")
 js_path = os.path.join(frontend_path, "js")
 images_path = os.path.join(frontend_path, "images")
@@ -114,10 +117,18 @@ if os.path.isdir(images_path):
     app.mount("/images", StaticFiles(directory=images_path), name="images")
 
 
+@app.get("/favicon.ico", include_in_schema=False)
+def favicon():
+    return Response(status_code=204)
+
 @app.get("/", include_in_schema=False)
+@app.get("/index.html", include_in_schema=False)
 def serve_index():
     """Serve the single-page application frontend."""
-    return FileResponse(os.path.join(frontend_path, "index.html"))
+    index_file = os.path.join(frontend_path, "index.html")
+    if os.path.exists(index_file):
+        return FileResponse(index_file)
+    return {"message": "FoodBridge API is running. Visit /docs for API documentation."}
 
 
 

@@ -1,0 +1,8 @@
+scratch/
+__pycache__/
+**/__pycache__/
+*.pyc
+**/*.pyc
+.env
+.vscode/
+foodresq_backup.db
