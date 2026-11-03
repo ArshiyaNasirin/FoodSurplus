@@ -6,3 +6,4 @@ if root_dir not in sys.path:
     sys.path.insert(0, root_dir)
 
 from backend.main import app
+

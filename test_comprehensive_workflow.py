@@ -5,11 +5,11 @@ import random
 sys.stdout.reconfigure(encoding='utf-8')
 
 from fastapi.testclient import TestClient
-from backend.main import app
+from backend.main import app as target_app
 from backend.database import SessionLocal
 from backend.models import SurplusFood, NGO, Match, PickupStatus, User
 
-client = TestClient(app)
+client = TestClient(target_app)
 
 def run_tests():
     print("=" * 70)

@@ -5,4 +5,6 @@ __pycache__/
 .env
 .vscode/
 foodresq_backup.db
-
+test_*.py
+inspect_db.py
+start.bat
