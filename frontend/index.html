@@ -14,6 +14,144 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>" />
 </head>
 <body>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       INITIAL SPLIT-SCREEN AUTHENTICATION & SECURE PORTAL GATE
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <div id="app-login-gate" class="app-login-gate">
+    <!-- Left Column: Visual & High-Impact Branding -->
+    <div class="gate-visual-col">
+      <div class="gate-visual-bg"></div>
+      <div class="gate-visual-overlay"></div>
+      <div class="gate-visual-content">
+        <div class="gate-glass-badge">
+          <span>🌱</span>
+        </div>
+        <h1 class="gate-brand-title">FoodBridge:</h1>
+        <p class="gate-brand-subtitle">Zero-Waste Food Rescue &amp; Community Distribution System.</p>
+        <div class="gate-accent-bar"></div>
+      </div>
+    </div>
+
+    <!-- Right Column: Security Authentication Form -->
+    <div class="gate-form-col">
+      <div class="gate-form-container">
+        <!-- Top Security Badge -->
+        <div class="gate-pill-badge">
+          <svg class="gate-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+          <span>FOODBRIDGE SECURE PORTAL</span>
+        </div>
+
+        <h2 class="gate-header-title">Welcome Back</h2>
+        <p class="gate-header-sub">Please enter your credentials to resume your session.</p>
+
+        <!-- Red Warning Notice Banner (matching reference design) -->
+        <div class="gate-alert-banner" id="gate-alert-banner">
+          <span class="gate-alert-icon">!</span>
+          <span id="gate-alert-text">Please sign in to access this portal.</span>
+        </div>
+
+        <!-- Dynamic Error Notice -->
+        <div id="gate-login-error" class="gate-error-banner" style="display: none;"></div>
+
+        <!-- Connection Form -->
+        <form id="gate-login-form" onsubmit="handleGateLoginSubmit(event)">
+          <!-- Field 1: Authenticated ID -->
+          <div class="gate-form-group">
+            <label for="gate-email" class="gate-field-label">AUTHENTICATED ID</label>
+            <div class="gate-input-wrap">
+              <span class="gate-input-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+              </span>
+              <input
+                type="email"
+                id="gate-email"
+                class="gate-input"
+                placeholder="nsdivyaprabha19@gmail.com"
+                value="nsdivyaprabha19@gmail.com"
+                required
+                autocomplete="email"
+              />
+            </div>
+          </div>
+
+          <!-- Field 2: Access Key -->
+          <div class="gate-form-group">
+            <div class="gate-label-split">
+              <label for="gate-password" class="gate-field-label">ACCESS KEY</label>
+              <a href="#" class="gate-forgot-link" onclick="handleGateForgotPassword(event)">Forgot Password?</a>
+            </div>
+            <div class="gate-input-wrap">
+              <span class="gate-input-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+              </span>
+              <input
+                type="password"
+                id="gate-password"
+                class="gate-input"
+                placeholder="••••••••"
+                value="password123"
+                required
+                autocomplete="current-password"
+              />
+              <button type="button" class="gate-eye-btn" onclick="toggleGatePasswordVisibility()" title="Show/Hide Access Key" aria-label="Show or hide password">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Remember session checkbox -->
+          <div class="gate-checkbox-row">
+            <label class="gate-checkbox-label">
+              <input type="checkbox" id="gate-remember" checked />
+              <span>Remember my session</span>
+            </label>
+          </div>
+
+          <!-- Primary Submit CTA Button (Glowing Gradient) -->
+          <button type="submit" id="btn-gate-submit" class="gate-submit-btn">
+            <span class="gate-submit-icon">➔]</span>
+            <span>ESTABLISH CONNECTION</span>
+          </button>
+        </form>
+
+        <!-- Divider -->
+        <div class="gate-divider">
+          <span>ALTERNATIVELY</span>
+        </div>
+
+        <!-- Quick Demo Profiles -->
+        <div class="gate-presets-grid">
+          <button type="button" class="gate-preset-btn" onclick="fillGateCredentials('restaurant')" title="Sign in as Restaurant Donor">🍴 The Green Bistro</button>
+          <button type="button" class="gate-preset-btn" onclick="fillGateCredentials('ngo')" title="Sign in as NGO Food Bank">🤝 City Hope NGO</button>
+          <button type="button" class="gate-preset-btn" onclick="fillGateCredentials('admin')" title="Sign in as Platform Admin">🛡️ Coordinator Admin</button>
+        </div>
+
+        <!-- Guest Bypass Button -->
+        <button type="button" class="gate-guest-btn" onclick="enterAsGuest()">
+          <span>Explore Platform as Guest</span>
+          <span>➔</span>
+        </button>
+
+        <div class="gate-register-prompt">
+          <span>Need to onboard a new kitchen or shelter? </span>
+          <a href="#" onclick="openGateRegisterModal(event)" class="gate-register-link">Register New Entity</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
 <div id="app">
 
   <!-- ═══════════════════════════════════════════════════════════════════════
@@ -75,6 +213,10 @@
         <span class="collapse-icon">◀</span>
         <span class="collapse-label">Collapse Menu</span>
       </button>
+      <button class="sidebar-signout-btn" onclick="handleGateSignOut()" title="Sign out to Secure Portal" style="width: 100%; margin-top: 8px; background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.2); color: #f87171; border-radius: 8px; padding: 7px 12px; font-size: 0.78rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;">
+        <span>🔒</span>
+        <span>Lock Session</span>
+      </button>
     </div>
   </aside>
 
@@ -128,6 +270,11 @@
         <!-- Quick Action: Post Surplus -->
         <button class="btn btn-primary btn-sm" onclick="openDonateModal()" id="btn-quick-post">
           <span>🍱</span> + Post Surplus
+        </button>
+
+        <!-- Exit / Sign Out to Secure Portal -->
+        <button class="btn btn-outline btn-sm nav-portal-btn" onclick="handleGateSignOut()" title="Lock session & return to Secure Portal">
+          <span>🔒</span> Exit to Portal
         </button>
       </div>
     </header>
@@ -1438,6 +1585,48 @@
 </div>
 
 </div> <!-- End of .app-main-view -->
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     MODAL: REGISTER NEW ENTITY (ONBOARDING FOR DONORS & NGOS)
+     ═══════════════════════════════════════════════════════════════════════ -->
+<div id="gate-register-modal" class="modal-overlay hidden" onclick="handleModalOverlayClick(event, 'gate-register-modal')">
+  <div class="modal" style="max-width: 520px; background: #0b1120; color: #f8fafc; border: 1px solid rgba(255,255,255,0.12);">
+    <div class="modal-header" style="border-bottom: 1px solid rgba(255,255,255,0.08); padding: 1.25rem 1.5rem;">
+      <h2 class="modal-title" style="color: #ffffff; font-size: 1.25rem;">🏢 Register New Organization</h2>
+      <button class="modal-close" style="color: #94a3b8;" onclick="closeModal('gate-register-modal')">&times;</button>
+    </div>
+    <form id="gate-register-form" onsubmit="handleGateRegisterSubmit(event)" style="padding: 1.5rem;">
+      <div class="form-group" style="margin-bottom: 1rem;">
+        <label style="display: block; color: #cbd5e1; font-size: 0.82rem; font-weight: 600; margin-bottom: 4px;">Organization / Entity Name</label>
+        <input type="text" id="reg-name" required placeholder="e.g., Spice Garden Restaurant or Seva Trust" style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #fff;" />
+      </div>
+      <div class="form-group" style="margin-bottom: 1rem;">
+        <label style="display: block; color: #cbd5e1; font-size: 0.82rem; font-weight: 600; margin-bottom: 4px;">Official Email Address</label>
+        <input type="email" id="reg-email" required placeholder="contact@organization.org" style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #fff;" />
+      </div>
+      <div class="form-group" style="margin-bottom: 1rem;">
+        <label style="display: block; color: #cbd5e1; font-size: 0.82rem; font-weight: 600; margin-bottom: 4px;">Entity Type &amp; Operational Role</label>
+        <select id="reg-role" style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: #1e293b; color: #fff;">
+          <option value="donor">Food Donor (Restaurant / Hotel / Caterer)</option>
+          <option value="recipient">NGO / Food Bank / Shelter</option>
+          <option value="courier">Logistics &amp; Courier Volunteer</option>
+        </select>
+      </div>
+      <div class="form-group" style="margin-bottom: 1rem;">
+        <label style="display: block; color: #cbd5e1; font-size: 0.82rem; font-weight: 600; margin-bottom: 4px;">Location / Operating City</label>
+        <input type="text" id="reg-location" placeholder="e.g., Koramangala, Bengaluru" style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #fff;" />
+      </div>
+      <div class="form-group" style="margin-bottom: 1.5rem;">
+        <label style="display: block; color: #cbd5e1; font-size: 0.82rem; font-weight: 600; margin-bottom: 4px;">Create Secure Access Key (Password)</label>
+        <input type="password" id="reg-password" required placeholder="At least 6 characters" minlength="6" style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06); color: #fff;" />
+      </div>
+      <div style="display: flex; justify-content: flex-end; gap: 10px;">
+        <button type="button" class="btn btn-secondary" onclick="closeModal('gate-register-modal')">Cancel</button>
+        <button type="submit" class="btn btn-primary" style="background: linear-gradient(90deg, #ec4899, #06b6d4); border: none; font-weight: 700; color: #fff; padding: 10px 20px; border-radius: 8px; cursor: pointer;">Register &amp; Establish Connection</button>
+      </div>
+    </form>
+  </div>
+</div>
 
 <!-- Toast Container -->
 <div class="toast-container" id="toast-container" aria-live="polite"></div>
