@@ -2483,38 +2483,51 @@ textarea {
 .gate-input-icon {
   position: absolute;
   left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
   color: #64748b;
   font-size: 1rem;
   pointer-events: none;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 2;
+  width: 20px;
+  height: 20px;
 }
 
+.gate-input-wrap .gate-input,
+.gate-input-wrap input.gate-input,
+input.gate-input,
 .gate-input {
   width: 100%;
-  background: #eef2ff;
-  border: 1.5px solid transparent;
-  border-radius: 12px;
-  padding: 13px 44px 13px 46px;
+  background: #ffffff !important;
+  border: 1.5px solid transparent !important;
+  border-radius: 12px !important;
+  padding: 13px 44px 13px 48px !important;
   font-size: 0.95rem;
   font-weight: 500;
-  color: #0f172a;
+  color: #0f172a !important;
   outline: none;
   transition: all 0.2s ease;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   box-sizing: border-box;
 }
 
+.gate-input-wrap .gate-input:focus,
+.gate-input-wrap input.gate-input:focus,
+input.gate-input:focus,
 .gate-input:focus {
-  background: #ffffff;
-  border-color: #06b6d4;
-  box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.25);
+  background: #ffffff !important;
+  border-color: #06b6d4 !important;
+  box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.25) !important;
 }
 
 .gate-eye-btn {
   position: absolute;
   right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
   background: transparent;
   border: none;
   cursor: pointer;
@@ -2524,6 +2537,7 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 2;
 }
 
 .gate-eye-btn:hover {

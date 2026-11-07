@@ -226,7 +226,16 @@ def seed_database():
             address="Koramangala Hub",
             city="Bengaluru"
         )
-        session.add_all([rest1, rest2, rest3, rest4, rest5, rest6, rest7, courier1, courier2])
+        admin1 = User(
+            name="Arshiya Admin",
+            email="arshiyaadmin@gmail.com",
+            hashed_password=default_pwd,
+            phone="+91 98450 99999",
+            role=UserRole.ADMIN.value,
+            address="FoodBridge HQ, Indiranagar",
+            city="Bengaluru"
+        )
+        session.add_all([rest1, rest2, rest3, rest4, rest5, rest6, rest7, courier1, courier2, admin1])
         session.flush()
 
         ngo1 = NGO(

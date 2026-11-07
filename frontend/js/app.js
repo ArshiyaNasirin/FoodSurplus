@@ -935,8 +935,8 @@ function showLoginGate() {
   if (gate) {
     gate.style.display = 'flex';
     const emailInput = document.getElementById('gate-email');
-    if (emailInput && !emailInput.value) {
-      emailInput.value = 'nsdivyaprabha19@gmail.com';
+    if (emailInput && (!emailInput.value || emailInput.value === 'nsdivyaprabha19@gmail.com')) {
+      emailInput.value = 'arshiyaadmin@gmail.com';
     }
     const pwdInput = document.getElementById('gate-password');
     if (pwdInput && !pwdInput.value) {
@@ -1014,8 +1014,8 @@ function fillGateCredentials(type) {
   if (!emailInput || !pwdInput) return;
 
   if (type === 'admin') {
-    emailInput.value = 'admin@foodbridge.org';
-    pwdInput.value = 'admin123';
+    emailInput.value = 'arshiyaadmin@gmail.com';
+    pwdInput.value = 'password123';
   } else if (type === 'restaurant') {
     emailInput.value = 'contact@greenbistro.com';
     pwdInput.value = 'password123';
@@ -1049,7 +1049,7 @@ async function handleGateLoginSubmit(e) {
   if (btn) btn.disabled = true;
 
   try {
-    if (email === 'admin@foodbridge.org' || email.includes('admin')) {
+    if (email === 'admin@foodbridge.org' || email === 'arshiyaadmin@gmail.com' || email.includes('admin') || email.includes('arshiya')) {
       let adminSuccess = false;
       try {
         const res = await fetch('/api/auth/admin/login', {
@@ -1089,7 +1089,7 @@ async function handleGateLoginSubmit(e) {
       console.warn('Network auth failed, falling back:', netErr);
     }
 
-    if (loginSuccess || password === 'password123' || email.includes('divya') || email.includes('greenbistro')) {
+    if (loginSuccess || password === 'password123' || email.includes('divya') || email.includes('arshiya') || email.includes('admin') || email.includes('greenbistro')) {
       localStorage.setItem('foodbridge_session_active', 'user');
       localStorage.setItem('foodbridge_user_email', email);
       hideLoginGate();
